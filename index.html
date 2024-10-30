@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier</title>
+    <script src="https://kit.fontawesome.com/7c066b37d1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="titre"> <h2> Mon Panier <span> d'achat</span></h2></div>
+    <section class="panier">
+        <div class="container item">
+            <img src="https://i.ebayimg.com/images/g/5F8AAOSw-otjJBhi/s-l1200.jpg" alt="Chaussure Air force 1" class="product-img">
+            <p>Chaussure Air force 1</p>
+            <h2 class="prix-unitaire">20000</h2> fcfa
+            <div class="prix-total">Prix total : <span class="prix-total-valeur">20000</span> fcfa</div>
+            <i class="fa-regular fa-heart like" onclick="toggleLike(this)"></i>
+            <div class="quantite-control">
+                <button onclick="decrementQty(this)">-</button>
+                <input type="text" class="quantite" value="1" readonly>
+                <button onclick="incrementQty(this)">+</button>
+            </div>
+            <button onclick="removeItem(this)" class="btn btn-danger">Supprimer</button>
+        </div>
+
+        <div class="container item">
+            <img src="https://img.freepik.com/premium-photo/t-shirt-design_742418-33759.jpg?w=740" alt="T-shirt" class="product-img">
+            <p>T-shirt</p>
+            <h2 class="prix-unitaire">3000</h2> fcfa
+            <div class="prix-total">Prix total : <span class="prix-total-valeur">3000</span> fcfa</div>
+            <i class="fa-regular fa-heart like" onclick="toggleLike(this)"></i>
+            <div class="quantite-control">
+                <button onclick="decrementQty(this)">-</button>
+                <input type="text" class="quantite" value="1" readonly>
+                <button onclick="incrementQty(this)">+</button>
+            </div>
+            <button onclick="removeItem(this)" class="btn btn-danger">Supprimer</button>
+        </div>
+
+        <div class="container item">
+            <img src="https://img.freepik.com/premium-photo/backpack-isolated_163782-6015.jpg?w=360" alt="Sac à dos" class="product-img">
+            <p>Sac à dos</p>
+            <h2 class="prix-unitaire">4500</h2> fcfa
+            <div class="prix-total">Prix total : <span class="prix-total-valeur">4500</span> fcfa</div>
+            <i class="fa-regular fa-heart like" onclick="toggleLike(this)"></i>
+            <div class="quantite-control">
+                <button onclick="decrementQty(this)">-</button>
+                <input type="text" class="quantite" value="1" readonly>
+                <button onclick="incrementQty(this)">+</button>
+            </div>
+            <button onclick="removeItem(this)" class="btn btn-danger">Supprimer</button>
+        </div>
+    </section>
+
+    <section class="panier">
+      
+    </section>
+    
+    <div class="total-global">
+        <h3>Prix total de tous les articles : <span id="prix-total-global">27500</span> fcfa</h3>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
