@@ -2,63 +2,55 @@ body {
     font-family: Arial, sans-serif;
 }
 
-span{
-    color: blue;
-}
-
-.titre{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.titre {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .panier {
     display: flex;
-    justify-content: space-around;
-    padding: 20px;
+    flex-wrap: wrap;
+    gap: 15px; /* Espace entre les items */
+    justify-content: center;
 }
 
-.container {
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    width: 280px; /* Ajustez la taille pour un meilleur alignement */
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
-    text-align: center;
-    border: 1px solid #ddd;
-    padding: 50px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    margin-bottom: 15px;
 }
 
 .product-img {
-    width: 150px;
+    width: 100%;
     height: auto;
     object-fit: cover;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
-.prix-unitaire, .quantite-control, .btn-danger, .like {
-    margin: 5px 0;
+    margin-bottom: 10px;
 }
 
 .quantite-control {
     display: flex;
     align-items: center;
-    gap: 5px;
+    margin-top: 10px;
 }
 
-.like.active {
-    color: blue;
+.quantite-control button {
+    margin: 0 5px;
 }
 
+.like {
+    margin-top: 10px;
+    cursor: pointer;
+}
 
 .total-global {
     text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-top: 30px;
-    padding: 20px;
-    border-top: 2px solid #ddd;
-    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ccc;
 }

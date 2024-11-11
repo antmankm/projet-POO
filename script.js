@@ -1,89 +1,70 @@
+class PanierItem {
+    constructor(element) {
+        this.element = element;
+        this.quantityInput = this.element.querySelector('.quantite');
+        this.unitPrice = parseInt(this.element.querySelector('.prix-unitaire').textContent);
+        this.totalElement = this.element.querySelector('.prix-total-valeur');
 
-function incrementQty(button) {
-    const item = button.closest('.item');
-    const quantityInput = item.querySelector('.quantite');
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-    updatePrice(item);
-}
+        
+        this.initEventListeners();
+    }
 
+    initEventListeners() {
+        this.element.querySelector('.quantite-control button:first-child').addEventListener('click', () => this.decrementQty());
+        this.element.querySelector('.quantite-control button:last-child').addEventListener('click', () => this.incrementQty());
+        this.element.querySelector('.btn-danger').addEventListener('click', () => this.removeItem());
+        this.element.querySelector('.like').addEventListener('click', (e) => this.toggleLike(e.target));
+    }
 
-function decrementQty(button) {
-    const item = button.closest('.item');
-    const quantityInput = item.querySelector('.quantite');
-    if (parseInt(quantityInput.value) > 1) {
-        quantityInput.value = parseInt(quantityInput.value) - 1;
-        updatePrice(item);
+    incrementQty() {
+        let quantity = parseInt(this.quantityInput.value);
+        quantity++;
+        this.quantityInput.value = quantity;
+        this.updatePrice();
+        PanierItem.calculateTotalGlobal();
+    }
+
+    decrementQty() {
+        let quantity = parseInt(this.quantityInput.value);
+        if (quantity > 1) {
+            quantity--;
+            this.quantityInput.value = quantity;
+            this.updatePrice();
+            PanierItem.calculateTotalGlobal();
+        }
+    }
+
+    toggleLike(button) {
+        button.classList.toggle('active');
+    }
+
+    updatePrice() {
+        this.totalElement.textContent = this.unitPrice * parseInt(this.quantityInput.value);
+    }
+
+    removeItem() {
+        this.element.remove();
+        PanierItem.calculateTotalGlobal();
+    }
+
+    static calculateTotalGlobal() {
+        const items = document.querySelectorAll('.item');
+        let total = 0;
+
+        items.forEach(item => {
+            const unitPrice = parseInt(item.querySelector('.prix-unitaire').textContent);
+            const quantity = parseInt(item.querySelector('.quantite').value);
+            total += unitPrice * quantity;
+        });
+
+        document.getElementById('prix-total-global').textContent = total;
     }
 }
 
+// Initialisation des objets PanierItem pour chaque élément du panier
+document.querySelectorAll('.item').forEach(itemElement => {
+    new PanierItem(itemElement);
+});
 
-function toggleLike(button) {
-    button.classList.toggle('active');
-}
-
-
-function updatePrice(item) {
-    const unitPrice = parseInt(item.querySelector('.prix-unitaire').textContent);
-    const quantity = parseInt(item.querySelector('.quantite').value);
-    const totalPriceEl = item.querySelector('.prix-total-valeur');
-    totalPriceEl.textContent = unitPrice * quantity;
-}
-
-
-function removeItem(button) {
-    const item = button.closest('.item');
-    item.remove();
-}
-
-
-function calculateTotalGlobal() {
-    const items = document.querySelectorAll(".item");
-    let total = 0;
-
-    items.forEach(item => {
-        const unitPrice = parseInt(item.querySelector(".prix-unitaire").textContent);
-        const quantity = parseInt(item.querySelector(".quantite").value);
-        total += unitPrice * quantity;
-    });
-
-    document.getElementById("prix-total-global").textContent = total;
-}
-
-
-function incrementQty(button) {
-    const item = button.closest(".item");
-    const quantityInput = item.querySelector(".quantite");
-    const unitPrice = parseInt(item.querySelector(".prix-unitaire").textContent);
-    const totalElement = item.querySelector(".prix-total-valeur");
-
-    let quantity = parseInt(quantityInput.value);
-    quantity++;
-    quantityInput.value = quantity;
-    totalElement.textContent = unitPrice * quantity;
-
-    calculateTotalGlobal(); 
-}
-
-function decrementQty(button) {
-    const item = button.closest(".item");
-    const quantityInput = item.querySelector(".quantite");
-    const unitPrice = parseInt(item.querySelector(".prix-unitaire").textContent);
-    const totalElement = item.querySelector(".prix-total-valeur");
-
-    let quantity = parseInt(quantityInput.value);
-    if (quantity > 1) {
-        quantity--;
-        quantityInput.value = quantity;
-        totalElement.textContent = unitPrice * quantity;
-
-        calculateTotalGlobal(); 
-    }
-}
-
-function removeItem(button) {
-    const item = button.closest(".item");
-    item.remove();
-    calculateTotalGlobal(); 
-}
-window.onload = calculateTotalGlobal;
-
+// Calcul initial du prix total global
+window.onload = PanierItem.calculateTotalGlobal;
